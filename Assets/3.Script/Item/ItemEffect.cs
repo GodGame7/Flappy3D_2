@@ -72,6 +72,7 @@ public class ItemEffect : MonoBehaviour
         //스타 오디오 실행
         bgmAudio.PlayOneShot(starClip);
         gameObject.transform.position = new Vector3(999, 999, 999);
+        GameManager.Instance.isBooster = true;
         //콜라이더 제거
 
         // 5초간 랜덤색으로 깜빡임
@@ -85,6 +86,7 @@ public class ItemEffect : MonoBehaviour
         //다시 원색으로 복귀
         //playerRender.material.color = Color.white;
         //콜라이더 복귀
+        GameManager.Instance.isBooster = false;
         bgmAudio.clip = desertClip;
         bgmAudio.Play();
         endStarTime = 0;
