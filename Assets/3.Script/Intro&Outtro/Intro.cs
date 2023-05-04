@@ -7,24 +7,26 @@ using UnityEngine.UI;
 public class Intro : MonoBehaviour
 {
 
+    [SerializeField] private Animator animator;
+    [SerializeField]private float blinkInterval = 1f;
+    [SerializeField]private GameObject button;
+    [SerializeField] private Transform player_transform;
+    Coroutine coroutine;
 
-    [SerializeField]private float blinkInterval = 0.2f;
-    [SerializeField] private GameObject button;
-    Coroutine Blink_co;
-
-    void Start()
+    private void Awake()
     {
-        
+        GameObject.Find("Player").TryGetComponent(out animator);
+        GameObject.Find("Player").TryGetComponent(out player_transform);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Blink_co == null)
-            Blink_co = StartCoroutine(CoBlink());
+        if (coroutine == null)
+            coroutine = StartCoroutine(Blink_co());
     }
 
-    IEnumerator CoBlink()
+    IEnumerator Blink_co()
     {
         while (true)
         {
@@ -34,5 +36,18 @@ public class Intro : MonoBehaviour
         }
     }
 
+    public void Start_button()
+    {
+        StartCoroutine(Start_Game());
+    }
 
+    IEnumerator Start_Game()
+    {
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("IntroScene") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.5f);
+
+        animator.SetTrigger("Start");
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Standing") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+
+        SceneManager.LoadScene("Game");
+    }
 }
