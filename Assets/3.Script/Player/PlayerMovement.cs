@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float jumpforce;
+    public float speed;
+    [SerializeField] private PlayerInput input;
+    [SerializeField] private Rigidbody rb;
 
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
-        
+        transform.position += transform.forward * speed * Time.deltaTime;
+    }
+    private void FixedUpdate()
+    {
+        if (input.input)
+        {
+            rb.AddForce(transform.up * jumpforce * Time.fixedDeltaTime, ForceMode.Impulse);
+        }
     }
 }
