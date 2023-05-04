@@ -47,4 +47,9 @@ public class PlayerMovement : MonoBehaviour
         rb.useGravity = true;
         rb.AddForce(transform.up * startjumpforce, ForceMode.Impulse);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
 }
