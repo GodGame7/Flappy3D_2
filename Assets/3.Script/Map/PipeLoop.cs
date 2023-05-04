@@ -5,7 +5,7 @@ using UnityEngine;
 public class PipeLoop : MonoBehaviour
 {
     private const float minPipeHeight = 0f;
-    private const float maxPipeHeight = 4.5f;
+    private const float maxPipeHeight = 9f;
 
     [SerializeField]
     private float setPosition = 20;
