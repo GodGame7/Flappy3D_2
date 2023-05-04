@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,13 +44,16 @@ public class GameManager : MonoBehaviour
     public bool isBooster;
 
     // 스코어 관련
-    [SerializeField]private int score;
-    public int SCORE { get; }
+    [SerializeField] private int score;
+    [SerializeField] private Text score_txt;
+    public int SCORE { get; private set; }
     public void AddScore()
     {
         if (!isGameOver)
-        { score++; 
-         // UI 가져와서 text 수정
+        { 
+            score++;
+            SCORE = score;
+            score_txt.text = "Score : " + score;
         }
     }
 
