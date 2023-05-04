@@ -40,4 +40,13 @@ public class GameManager : MonoBehaviour
     // 죽을 때 true, 게임오버UI에서 false로 전환
     public bool isGameOver;
     public bool isBooster;
+
+    // 스코어 관련
+    private int score;
+    public int SCORE { get; }
+    public void AddScore()
+    {
+        if (!isGameOver)
+        { score++; }
+    }
 }
