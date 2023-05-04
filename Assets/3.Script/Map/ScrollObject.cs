@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ScrollObject : MonoBehaviour
-{
+{ 
     [SerializeField]
     private float speed = 10f;
 

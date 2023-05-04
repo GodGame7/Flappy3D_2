@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundLoop : MonoBehaviour
-{
+{ 
     private float groundLength;
 
     private void Awake()
