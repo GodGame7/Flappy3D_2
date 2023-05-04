@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundLoop : MonoBehaviour
-{ 
-    private float groundLength;
+{
+    private float groundLength = 100;
 
     private void Awake()
     {
-        groundLength = 10 * transform.Find("Plane").transform.localScale.z;
+        //groundLength = 10 * GameObject.Find("Plane").transform.localScale.z;
     }
 
     private void Update()
     {
-        if (transform.position.z <= -groundLength * 0.6f)
+        if (transform.position.z <= -groundLength * 0.8f)
         {
             Reposition();
         }
