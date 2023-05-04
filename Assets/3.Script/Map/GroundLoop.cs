@@ -3,25 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundLoop : MonoBehaviour
-{ 
-    private float groundLength;
-
-    private void Awake()
-    {
-        groundLength = 10 * transform.Find("Plane").transform.localScale.z;
-    }
+{
+    [SerializeField]
+    private float setPosition = 100;
+    [SerializeField]
+    private float returnPosition = 50;
 
     private void Update()
     {
-        if (transform.position.z <= -groundLength * 0.6f)
+        if (transform.position.z <= -returnPosition)
         {
-            Reposition();
+            Reposition(setPosition);
         }
     }
 
-    private void Reposition()
+    private void Reposition(float length)
     {
-        Vector3 position = 2 * groundLength * Vector3.forward;
+        Vector3 position = length * Vector3.forward;
         transform.position += position;
     }
 }

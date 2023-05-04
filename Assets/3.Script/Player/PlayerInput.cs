@@ -45,7 +45,7 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (gm.isStart) { OnClick(); }
-            else if (!gm.isStart) { gm.isStart = true;  move.StartJump(); }
+            else if (!gm.isStart && !gm.isGameOver) { gm.isStart = true; move.StartJump(); }
         }
     }
 
@@ -64,4 +64,16 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Pipe"))
+        {
+            gm.isStart = false;
+            gm.isGameOver = true;
+        }
+        if (other.CompareTag("ScoreZone"))
+        {
+            gm.AddScore();
+        }
+    }
 }
