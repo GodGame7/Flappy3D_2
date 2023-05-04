@@ -13,7 +13,7 @@ public class ItemData : ScriptableObject
 
     [Header("변수")]
     public Vector3 scale = new Vector3(1.5f, 1.5f, 1.5f); //크기 1.5배
-    public float speed = 1f; // 속도밸런스는 추후변경    
+    public float speed = 1.5f; // 속도밸런스는 추후변경    
     
 
 

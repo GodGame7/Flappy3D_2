@@ -9,6 +9,14 @@ public class ScrollObject : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(speed * Time.deltaTime * Vector3.back);
+        
+        if (GameManager.Instance.isStart)
+        {
+            if(GameManager.Instance.isBooster)
+            {
+                speed *= 1.5f;
+            }
+            transform.Translate(speed * Time.deltaTime * Vector3.back);
+        }
     }
 }

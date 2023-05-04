@@ -1,11 +1,22 @@
 using UnityEngine;
+using System;
 
 public class PlayerInput : MonoBehaviour
 {
     public bool input = false;
+    public event Action OnClick;
+    private PlayerMovement move;
+    private GameManager gm;
+
+    private void Awake()
+    {
+        gm = GameManager.Instance;
+        move = GetComponent<PlayerMovement>();
+    }
+
     private void Update()
     {
-        MouseClick_multi(); //Ver3
+       MouseClick(); //Ver3
     }
 
 
@@ -31,9 +42,10 @@ public class PlayerInput : MonoBehaviour
     // Ver2 : Update문에 넣으면 인풋 중 계속 실행, 이벤트로 실행 시 1번 위로 상승.
     public void MouseClick()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse Click");
+            if (gm.isStart) { OnClick(); }
+            else if (!gm.isStart && !gm.isGameOver) { gm.isStart = true; move.StartJump(); }
         }
     }
 
@@ -52,4 +64,12 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Pipe"))
+        {
+            gm.isStart = false;
+            gm.isGameOver = true;
+        }
+    }
 }
