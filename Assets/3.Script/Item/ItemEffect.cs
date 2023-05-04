@@ -6,15 +6,31 @@ public class ItemEffect : MonoBehaviour
 {
     private ItemData itemData;
     public event System.Action OnItem;
+    [Header("플레이어")]
     [SerializeField] private GameObject player;
     [SerializeField] private Renderer playerRender;
-    WaitForSeconds colorTime = new WaitForSeconds(0.01f);
-    private float endStarTime = 0f;
+
+    [Header("오디오")]
     [SerializeField] private AudioClip mushRoomClip;
     [SerializeField] private AudioClip starClip;
     [SerializeField] private AudioSource Audio;
+    WaitForSeconds colorTime = new WaitForSeconds(0.01f);
+    private float endStarTime = 0f;
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            //이벤트발생
 
+            OnItem?.Invoke();
+            gameObject.SetActive(false);
+        }
+    }
     public void OnStar()
     {
         StartCoroutine(Star_co());
@@ -27,7 +43,7 @@ public class ItemEffect : MonoBehaviour
 
     public void OnCoin()
     {
-        //스코어 +100
+        //스코어 +100 
     }
 
     private IEnumerator Mushroom_co()
