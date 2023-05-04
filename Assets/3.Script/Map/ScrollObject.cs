@@ -9,6 +9,9 @@ public class ScrollObject : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(speed * Time.deltaTime * Vector3.back);
+        if (GameManager.Instance.isStart)
+        {
+            transform.Translate(speed * Time.deltaTime * Vector3.back);
+        }
     }
 }
