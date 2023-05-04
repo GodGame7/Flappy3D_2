@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
             if (_instance == null)
             {
                 _instance = FindObjectOfType<GameManager>();
+                DontDestroyOnLoad(_instance);
             }
             return _instance;
         }
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
     public bool isBooster;
 
     // 스코어 관련
-    private int score;
+    [SerializeField]private int score;
     public int SCORE { get; }
     public void AddScore()
     {

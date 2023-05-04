@@ -71,5 +71,9 @@ public class PlayerInput : MonoBehaviour
             gm.isStart = false;
             gm.isGameOver = true;
         }
+        if (other.CompareTag("ScoreZone"))
+        {
+            gm.AddScore();
+        }
     }
 }
