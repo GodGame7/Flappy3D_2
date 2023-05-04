@@ -15,7 +15,9 @@ public class ItemEffect : MonoBehaviour
     [Header("오디오")]
     [SerializeField] private AudioClip mushRoomClip;
     [SerializeField] private AudioClip starClip;
+    [SerializeField] private AudioClip desertClip;
     [SerializeField] private AudioSource Audio;
+    [SerializeField] private AudioSource bgmAudio;
     [Header("이벤트")]
     public UnityEvent OnItem;
     WaitForSeconds colorTime = new WaitForSeconds(0.01f);
@@ -68,7 +70,7 @@ public class ItemEffect : MonoBehaviour
     private IEnumerator Star_co()
     {
         //스타 오디오 실행
-        Audio.PlayOneShot(starClip);
+        bgmAudio.PlayOneShot(starClip);
         gameObject.transform.position = new Vector3(999, 999, 999);
         //콜라이더 제거
 
@@ -77,15 +79,17 @@ public class ItemEffect : MonoBehaviour
         {
 
             endStarTime += Time.deltaTime;
-            playerRender.material.color = new Color(Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f);
+            //playerRender.material.color = new Color(Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f);
             yield return colorTime;
         }
         //다시 원색으로 복귀
-        playerRender.material.color = Color.white;
+        //playerRender.material.color = Color.white;
         //콜라이더 복귀
-
+        bgmAudio.clip = desertClip;
+        bgmAudio.Play();
         endStarTime = 0;
         gameObject.SetActive(false);
+        yield return null;
 
     }
 }
