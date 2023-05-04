@@ -26,5 +26,18 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    public bool isStart = false;
+    private void Start()
+    {
+        isStart = false;
+        isGameOver = false;
+        isBooster = false;
+    }
+
+    // 스타트점프할 때 true, 죽을 떄 false
+    public bool isStart; 
+
+    // UI트리거
+    // 죽을 때 true, 게임오버UI에서 false로 전환
+    public bool isGameOver;
+    public bool isBooster;
 }
