@@ -26,5 +26,7 @@ public class RankingSystem : MonoBehaviour
     [SerializeField] private GameObject ranking_UI;
     [SerializeField] private Text ranking_text;
 
+    public void 
+
 
 }
