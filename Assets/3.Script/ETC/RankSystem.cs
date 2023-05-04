@@ -35,29 +35,33 @@ public class RankSystem : MonoBehaviour
     [SerializeField] private GameObject ranking_UI;
     [SerializeField] private Text ranking_text;
 
+    [Header("GameManager")]
+    [SerializeField] private GameManager gameManager;
 
+    private int score;
     private string path;
     private string fileName = "Ranking.json";
 
-    // 디버그용 더미 스코어
-    [SerializeField] public int score;
-
-    // 싱글톤
+    // 패스 초기화
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else Destroy(gameObject);
-
         path = Path.Combine(Application.dataPath, "Plugins/", fileName);
+    }
+
+    // 죽었는지 확인
+    private void Update()
+    {
+        if(!gameManager.isGameOver)
+        {
+            return;
+        }
+        On_InputName();
     }
 
     // 게임 종료 후 이름을 입력할 UI 활성화
     public void On_InputName()
     {
+        score = gameManager.SCORE;
         inputName_UI.SetActive(true);
         pleaseRetry_txt.SetActive(false);
     }
@@ -96,7 +100,7 @@ public class RankSystem : MonoBehaviour
         SceneManager.LoadScene(Scenename, LoadSceneMode.Single);
     }
 
-
+    // 에러 메세지 띄우기
     IEnumerator OnErrorMessage()
     {
         pleaseRetry_txt.SetActive(true);
@@ -104,6 +108,7 @@ public class RankSystem : MonoBehaviour
         pleaseRetry_txt.SetActive(false);
     }
 
+    // 랭킹 저장
     public void M_input_ranking_jaon(Ranking ranking)
     {
 
