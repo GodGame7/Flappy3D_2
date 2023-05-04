@@ -22,8 +22,6 @@ public class Intro : MonoBehaviour
     {
         if (Blink_co == null)
             Blink_co = StartCoroutine(CoBlink());
-
-
     }
 
     IEnumerator CoBlink()
@@ -35,4 +33,6 @@ public class Intro : MonoBehaviour
             button.SetActive(!button.activeSelf);
         }
     }
+
+
 }

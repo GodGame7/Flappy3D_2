@@ -198,8 +198,8 @@ ModelImporter:
       name: IntroScene
       takeName: Armature|Armature|Armature|037 FINAL_BOWSER_RAISE_HAND_SPIN|Armature|037
       internalID: 0
-      firstFrame: 53
-      lastFrame: 135
+      firstFrame: 55
+      lastFrame: 133
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
