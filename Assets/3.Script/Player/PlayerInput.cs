@@ -45,7 +45,7 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (gm.isStart) { OnClick(); }
-            else if (!gm.isStart) { gm.isStart = true; move.StartJump(); }
+            else if (!gm.isStart && !gm.isGameOver) { gm.isStart = true; move.StartJump(); }
         }
     }
 
