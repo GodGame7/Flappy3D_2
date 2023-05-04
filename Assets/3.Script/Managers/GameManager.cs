@@ -48,6 +48,13 @@ public class GameManager : MonoBehaviour
     public void AddScore()
     {
         if (!isGameOver)
-        { score++; }
+        { score++; 
+         // UI 가져와서 text 수정
+        }
     }
+
+
+
+
+
 }

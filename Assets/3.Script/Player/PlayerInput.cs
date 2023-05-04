@@ -70,6 +70,7 @@ public class PlayerInput : MonoBehaviour
         {
             gm.isStart = false;
             gm.isGameOver = true;
+            move.NoGravity();
         }
         if (other.CompareTag("ScoreZone"))
         {
