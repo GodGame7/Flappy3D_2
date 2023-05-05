@@ -55,7 +55,7 @@ public class Intro : MonoBehaviour
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Standing") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
 
         //아래로 이동
-        float duration = 2f;
+        float duration = 1.5f;
         float Timer = 0f;
         //시작위치
         Vector3 startPos = player_transform.position;
