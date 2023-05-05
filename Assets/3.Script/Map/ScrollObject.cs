@@ -8,15 +8,23 @@ public class ScrollObject : MonoBehaviour
     private float speed = 10f;
 
     private void Update()
-    {
-        
+    {        
         if (GameManager.Instance.isStart)
         {
-            if(GameManager.Instance.isBooster)
-            {
-                speed *= 1.5f;
-            }
+            //if(GameManager.Instance.isBooster)
+            //{
+            //    speed *= 1.5f;
+            //}
             transform.Translate(speed * Time.deltaTime * Vector3.back);
         }
+    }
+
+    public void BoosterOn(float boosterSpeed)
+    {
+        speed *= boosterSpeed;
+    }
+    public void BoosterOff(float boosterSpeed)
+    {
+        speed /= boosterSpeed;
     }
 }

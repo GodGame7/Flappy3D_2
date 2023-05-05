@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         input.OnClick += () => Jump();
-        rb.useGravity = false;
+        NoGravity();
     }
     private int i = 0;
     private int index;
@@ -47,9 +47,9 @@ public class PlayerMovement : MonoBehaviour
         rb.useGravity = true;
         rb.AddForce(transform.up * startjumpforce, ForceMode.Impulse);
     }
-
-    private void OnTriggerEnter(Collider other)
+    public void NoGravity()
     {
-        
+        rb.useGravity = false;
+        rb.velocity = Vector3.zero;
     }
 }
