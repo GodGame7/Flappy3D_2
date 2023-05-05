@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
             if (_instance == null)
             {
                 _instance = FindObjectOfType<GameManager>();
+                DontDestroyOnLoad(_instance);
             }
             return _instance;
         }
@@ -40,4 +42,23 @@ public class GameManager : MonoBehaviour
     // 죽을 때 true, 게임오버UI에서 false로 전환
     public bool isGameOver;
     public bool isBooster;
+
+    // 스코어 관련
+    [SerializeField] private int score;
+    [SerializeField] private Text score_txt;
+    public int SCORE { get; private set; }
+    public void AddScore()
+    {
+        if (!isGameOver)
+        { 
+            score++;
+            SCORE = score;
+            score_txt.text = "Score : " + score;
+        }
+    }
+
+
+
+
+
 }
