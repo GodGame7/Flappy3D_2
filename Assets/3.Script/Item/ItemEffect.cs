@@ -24,7 +24,6 @@ public class ItemEffect : MonoBehaviour
     [Header("이벤트")]
 
     public UnityEvent OnItem;
-    public UnityEvent<float> OnBooster;
     private ScrollObject Scroll;
     WaitForSeconds colorTime = new WaitForSeconds(0.01f);
     private float endStarTime = 0f;
@@ -32,6 +31,7 @@ public class ItemEffect : MonoBehaviour
     {
         //gameObject.SetActive(true) ;
         Scroll = FindObjectOfType<ScrollObject>();
+        playerRender.GetComponentsInChildren<Renderer>();
 
     }
 
@@ -57,7 +57,7 @@ public class ItemEffect : MonoBehaviour
     public void OnCoin()
     {
         //스코어 +1 
-        GameManager.Instance.AddScore();
+        //GameManager.Instance.AddScore();
         Audio.PlayOneShot(coinClip);
         gameObject.SetActive(false);
         
@@ -101,10 +101,11 @@ public class ItemEffect : MonoBehaviour
 
     private IEnumerator Star_co()
     {
-        //여기서 속도올려주고
-        GameManager.Instance.isBooster = true;
-        OnItem.Invoke();
+        
+        
+        
         //스타 오디오 실행
+        Scroll.BoosterOn(itemData.speed);
         bgmAudio.PlayOneShot(starClip);
         gameObject.transform.position = new Vector3(999, 999, 999);
         GameManager.Instance.isBooster = true;
@@ -126,6 +127,7 @@ public class ItemEffect : MonoBehaviour
         
         
         //여기서 속도 다시리셋
+        Scroll.BoosterOff(itemData.speed);
         GameManager.Instance.isBooster = false;
         bgmAudio.clip = desertClip;
         bgmAudio.Play();
