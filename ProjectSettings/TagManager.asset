@@ -7,6 +7,10 @@ TagManager:
   - Pipe
   - Original
   - ScoreZone
+  - Coin
+  - Mush
+  - MiniMush
+  - Star
   layers:
   - Default
   - TransparentFX

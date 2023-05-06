@@ -22,17 +22,21 @@ public class ItemEffect : MonoBehaviour
     [SerializeField] private AudioSource Audio;
     [SerializeField] private AudioSource bgmAudio;
     [Header("이벤트")]
-
     public UnityEvent OnItem;
+
+    
+    [System.Serializable]
+    public class BoosterEvent : UnityEvent<float> { }
+    BoosterEvent OnStarBooster;
     private ScrollObject Scroll;
     WaitForSeconds colorTime = new WaitForSeconds(0.01f);
     private float endStarTime = 0f;
     private void OnEnable()
     {
-        //gameObject.SetActive(true) ;
         Scroll = FindObjectOfType<ScrollObject>();
         playerRender = player.GetComponentsInChildren<Renderer>();
-
+        player = GameObject.FindGameObjectWithTag("Player");
+        OnStarBooster = new BoosterEvent();
     }
 
     
@@ -59,7 +63,7 @@ public class ItemEffect : MonoBehaviour
     public void OnCoin()
     {
         //스코어 +1 
-        //GameManager.Instance.AddScore();
+        GameManager.Instance.AddScore();
         Audio.PlayOneShot(coinClip);
         gameObject.SetActive(false);
         
@@ -103,11 +107,15 @@ public class ItemEffect : MonoBehaviour
 
     private IEnumerator Star_co()
     {
-
-        Debug.Log(Scroll);
+        //여기가 안됨 (부스터시작)
+        Debug.Log(OnStarBooster);
+        OnStarBooster.RemoveListener(Scroll.BoosterOff);
+        OnStarBooster.AddListener(Scroll.BoosterOn);
+        OnStarBooster?.Invoke(itemData.speed);
+        // 부스터
+        bgmAudio.Stop();
         
         //스타 오디오 실행
-        Scroll.BoosterOn(itemData.speed);
         bgmAudio.PlayOneShot(starClip);
         gameObject.transform.position = new Vector3(999, 999, 999);
         GameManager.Instance.isBooster = true;
@@ -125,9 +133,14 @@ public class ItemEffect : MonoBehaviour
         }
 
 
-        bgmAudio.Stop();
         //여기서 속도 다시리셋
-        Scroll.BoosterOff(itemData.speed);
+        //여기가 안됨 (부스터 스탑)
+        OnStarBooster.RemoveListener(Scroll.BoosterOn);
+        OnStarBooster.AddListener(Scroll.BoosterOff);
+        OnStarBooster?.Invoke(itemData.speed);
+        //부스터
+
+        bgmAudio.Stop();
         GameManager.Instance.isBooster = false;
         bgmAudio.clip = desertClip;
         bgmAudio.Play();

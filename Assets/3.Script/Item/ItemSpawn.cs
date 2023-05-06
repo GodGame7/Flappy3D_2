@@ -10,11 +10,15 @@ public class ItemSpawn : MonoBehaviour
     [SerializeField] private GameObject star;
     private float LastSpawnItem = 0f;
     private int ranNum;
-
+    private void Awake()
+    {
+        coin = GameObject.FindGameObjectWithTag("Coin");
+        mushRoom = GameObject.FindGameObjectWithTag("Mush");
+        miniMush = GameObject.FindGameObjectWithTag("MiniMush");
+        star = GameObject.FindGameObjectWithTag("Star");
+    }
     private void OnEnable()
     {
-
-
 
         ranNum = Random.Range(0, 7);
         switch (ranNum)
@@ -31,12 +35,12 @@ public class ItemSpawn : MonoBehaviour
                 break;
             case 2:
                 {
-
+                    //노템 일부러 비워둠
                 }
                 break;
             case 3:
                 {
-
+                    //노템 일부러 비워둠
                 }
                 break;
             case 4:
