@@ -18,12 +18,8 @@ public class GameManager : MonoBehaviour
                 {
                     GameObject go = new GameObject("GameManager");
                     _instance = go.AddComponent<GameManager>();
+                    DontDestroyOnLoad(_instance.gameObject);
                 }
-                DontDestroyOnLoad(_instance.gameObject);
-            }
-            else if (_instance != FindObjectOfType<GameManager>())
-            {
-                Destroy(FindObjectOfType<GameManager>().gameObject);
             }
             return _instance;
         }
