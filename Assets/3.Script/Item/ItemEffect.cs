@@ -22,12 +22,16 @@ public class ItemEffect : MonoBehaviour
     [SerializeField] private AudioSource Audio;
     [SerializeField] private AudioSource bgmAudio;
     [Header("이벤트")]
+
     public UnityEvent OnItem;
+    public UnityEvent<float> OnBooster;
+    private ScrollObject Scroll;
     WaitForSeconds colorTime = new WaitForSeconds(0.01f);
     private float endStarTime = 0f;
     private void Awake()
     {
         //gameObject.SetActive(true) ;
+        Scroll = FindObjectOfType<ScrollObject>();
 
     }
 
@@ -97,6 +101,9 @@ public class ItemEffect : MonoBehaviour
 
     private IEnumerator Star_co()
     {
+        //여기서 속도올려주고
+        GameManager.Instance.isBooster = true;
+        OnItem.Invoke();
         //스타 오디오 실행
         bgmAudio.PlayOneShot(starClip);
         gameObject.transform.position = new Vector3(999, 999, 999);
@@ -114,7 +121,11 @@ public class ItemEffect : MonoBehaviour
         }
         //다시 원색으로 복귀
         //playerRender.material.color = Color.white;
+
         //콜라이더 복귀
+        
+        
+        //여기서 속도 다시리셋
         GameManager.Instance.isBooster = false;
         bgmAudio.clip = desertClip;
         bgmAudio.Play();
