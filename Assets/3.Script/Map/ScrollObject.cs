@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public class ScrollObject : MonoBehaviour
 { 
@@ -11,10 +13,6 @@ public class ScrollObject : MonoBehaviour
     {        
         if (GameManager.Instance.isStart)
         {
-            //if(GameManager.Instance.isBooster)
-            //{
-            //    speed *= 1.5f;
-            //}
             transform.Translate(speed * Time.deltaTime * Vector3.back);
         }
     }
@@ -22,6 +20,8 @@ public class ScrollObject : MonoBehaviour
     public void BoosterOn(float boosterSpeed)
     {
         speed *= boosterSpeed;
+
+
     }
     public void BoosterOff(float boosterSpeed)
     {
