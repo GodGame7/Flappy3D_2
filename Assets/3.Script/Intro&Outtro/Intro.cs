@@ -70,6 +70,11 @@ public class Intro : MonoBehaviour
             yield return null;
         }
 
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.Init();
+        }
+
         SceneManager.LoadScene("Game");
     }
 }

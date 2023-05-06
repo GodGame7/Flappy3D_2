@@ -14,21 +14,40 @@ public class GameManager : MonoBehaviour
             if (_instance == null)
             {
                 _instance = FindObjectOfType<GameManager>();
-                DontDestroyOnLoad(_instance);
+                if (_instance == null)
+                {
+                    GameObject go = new GameObject("GameManager");
+                    _instance = go.AddComponent<GameManager>();
+                }
+                DontDestroyOnLoad(_instance.gameObject);
+            }
+            else if (_instance != FindObjectOfType<GameManager>())
+            {
+                Destroy(FindObjectOfType<GameManager>().gameObject);
             }
             return _instance;
         }
     }
     private void Awake()
     {
-        if (Instance == null)
+        if (_instance == null)
         {
-            Destroy(gameObject);
+            _instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else if (_instance != this)
+        {
+            Destroy(this.gameObject);
         }
     }
     #endregion
 
     private void Start()
+    {
+        Init();
+    }
+
+    public void Init()
     {
         isStart = false;
         isGameOver = false;
@@ -36,7 +55,7 @@ public class GameManager : MonoBehaviour
     }
 
     // 스타트점프할 때 true, 죽을 떄 false
-    public bool isStart; 
+    public bool isStart;
 
     // UI트리거
     // 죽을 때 true, 게임오버UI에서 false로 전환
@@ -49,8 +68,17 @@ public class GameManager : MonoBehaviour
     public int SCORE { get; private set; }
     public void AddScore()
     {
+        if (score_txt == null)
+        {
+            score = 0;
+            GameObject scoreTextObject = GameObject.Find("Canvas/Score_txt");
+            if (scoreTextObject != null)
+            {
+                score_txt = scoreTextObject.GetComponent<Text>();
+            }
+        }
         if (!isGameOver)
-        { 
+        {
             score++;
             SCORE = score;
             score_txt.text = "Score : " + score;
