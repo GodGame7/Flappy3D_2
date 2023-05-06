@@ -3623,7 +3623,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 782552340}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -4219,8 +4219,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 701474259}
   - {fileID: 2146334961}
+  - {fileID: 701474259}
   - {fileID: 305599367}
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -6792,7 +6792,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "3\uAE00\uC790 \uC774\uD558\uC758 \uC774\uB984\uC744 \uC785\uB825\uD558\uC138\uC694."
+  m_Text: "3\uAE00\uC790 \uC774\uB984\uC744 \uC785\uB825\uD558\uC138\uC694."
 --- !u!222 &1297776735
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10985,7 +10985,7 @@ RectTransform:
   - {fileID: 1885645438}
   - {fileID: 174803024}
   m_Father: {fileID: 782552340}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
