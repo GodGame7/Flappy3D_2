@@ -14,8 +14,11 @@ public class ItemEffect : MonoBehaviour
 
     [Header("오디오")]
     [SerializeField] private AudioClip mushRoomClip;
+    [SerializeField] private AudioClip coinClip;
     [SerializeField] private AudioClip starClip;
     [SerializeField] private AudioClip desertClip;
+    [SerializeField] private AudioClip minimushClip;
+    [SerializeField] private AudioClip resetTransformClip;
     [SerializeField] private AudioSource Audio;
     [SerializeField] private AudioSource bgmAudio;
     [Header("이벤트")]
@@ -49,7 +52,15 @@ public class ItemEffect : MonoBehaviour
 
     public void OnCoin()
     {
-        //스코어 +100 
+        //스코어 +1 
+        GameManager.Instance.AddScore();
+        Audio.PlayOneShot(coinClip);
+        gameObject.SetActive(false);
+        
+    }
+    public void OnMiniMush()
+    {
+        StartCoroutine(MiniMushroom_co());
     }
 
     private IEnumerator Mushroom_co()
@@ -63,6 +74,23 @@ public class ItemEffect : MonoBehaviour
         yield return new WaitForSeconds(itemData.itemTime);
         //크기 감소
         player.transform.localScale = new Vector3(1, 1, 1);
+        Audio.PlayOneShot(resetTransformClip);
+        gameObject.SetActive(false);
+
+    }
+
+    private IEnumerator MiniMushroom_co()
+    {
+        gameObject.transform.position = new Vector3(999, 999, 999);
+        // 버섯 오디오 실행
+        Audio.PlayOneShot(minimushClip);
+        //크기 증가
+        player.transform.localScale = itemData.miniscale;
+
+        yield return new WaitForSeconds(itemData.itemTime);
+        //크기 감소
+        player.transform.localScale = new Vector3(1, 1, 1);
+        Audio.PlayOneShot(resetTransformClip);
         gameObject.SetActive(false);
 
     }
@@ -73,6 +101,7 @@ public class ItemEffect : MonoBehaviour
         bgmAudio.PlayOneShot(starClip);
         gameObject.transform.position = new Vector3(999, 999, 999);
         GameManager.Instance.isBooster = true;
+
         //콜라이더 제거
 
         // 5초간 랜덤색으로 깜빡임
