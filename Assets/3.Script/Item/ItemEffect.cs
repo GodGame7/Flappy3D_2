@@ -10,7 +10,7 @@ public class ItemEffect : MonoBehaviour
     [SerializeField] private ItemData itemData;
     [Header("플레이어")]
     [SerializeField] private GameObject player;
-    [SerializeField] private Renderer playerRender;
+    [SerializeField] private Renderer[] playerRender;
 
     [Header("오디오")]
     [SerializeField] private AudioClip mushRoomClip;
@@ -27,13 +27,15 @@ public class ItemEffect : MonoBehaviour
     private ScrollObject Scroll;
     WaitForSeconds colorTime = new WaitForSeconds(0.01f);
     private float endStarTime = 0f;
-    private void Awake()
+    private void OnEnable()
     {
         //gameObject.SetActive(true) ;
         Scroll = FindObjectOfType<ScrollObject>();
-        playerRender.GetComponentsInChildren<Renderer>();
+        playerRender = player.GetComponentsInChildren<Renderer>();
 
     }
+
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -101,8 +103,8 @@ public class ItemEffect : MonoBehaviour
 
     private IEnumerator Star_co()
     {
-        
-        
+
+        Debug.Log(Scroll);
         
         //스타 오디오 실행
         Scroll.BoosterOn(itemData.speed);
@@ -110,22 +112,20 @@ public class ItemEffect : MonoBehaviour
         gameObject.transform.position = new Vector3(999, 999, 999);
         GameManager.Instance.isBooster = true;
 
-        //콜라이더 제거
-
-        // 5초간 랜덤색으로 깜빡임
-        while (endStarTime <= 5f)
+        for (int i =0; i<playerRender.Length; i++)
         {
-
-            endStarTime += Time.deltaTime;
-            //playerRender.material.color = new Color(Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f);
-            yield return colorTime;
+            playerRender[i].material.color = Color.yellow;
         }
+        
+        yield return new WaitForSeconds(7f);
         //다시 원색으로 복귀
-        //playerRender.material.color = Color.white;
+        for (int i = 0; i < playerRender.Length; i++)
+        {
+            playerRender[i].material.color = Color.white;
+        }
 
-        //콜라이더 복귀
-        
-        
+
+        bgmAudio.Stop();
         //여기서 속도 다시리셋
         Scroll.BoosterOff(itemData.speed);
         GameManager.Instance.isBooster = false;

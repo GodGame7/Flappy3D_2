@@ -69,9 +69,9 @@ public class PlayerInput : MonoBehaviour
     {
         if (other.CompareTag("Pipe")&& GameManager.Instance.isBooster)
         {
-           
+            other.gameObject.SetActive(false);
         }
-        if (other.CompareTag("Pipe"))
+        else if (other.CompareTag("Pipe")&& !GameManager.Instance.isBooster)
         {
             gm.isStart = false;
             gm.isGameOver = true;

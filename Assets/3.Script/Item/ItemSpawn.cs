@@ -11,56 +11,53 @@ public class ItemSpawn : MonoBehaviour
     private float LastSpawnItem = 0f;
     private int ranNum;
 
-    private void Update()
+    private void OnEnable()
     {
-        if (LastSpawnItem<1f)
+
+
+
+        ranNum = Random.Range(0, 7);
+        switch (ranNum)
         {
-            return;
-        }
-        else
-        {
-            ranNum = Random.Range(0, 7);
-            switch(ranNum)
-            {
-                case 0:
-                    {
-                        SetCoin();
-                    }
-                    break;
-                case 1:
-                    {
-                        SetCoin();
-                    }
-                    break;
-                case 2:
-                    {
-                        SetCoin();
-                    }
-                    break;
-                case 3:
-                    {
-                        SetMush();
-                    }
-                    break;
-                case 4:
-                    {
-                        SetMush();
-                    }
-                    break;
-                case 5:
-                    {
-                        SetMiniMush();
-                    }
-                    break;
-                case 6:
-                    {
-                        SetStar();
-                    }
-                    break;
-               
-            }
+            case 0:
+                {
+                    SetCoin();
+                }
+                break;
+            case 1:
+                {
+                    SetCoin();
+                }
+                break;
+            case 2:
+                {
+
+                }
+                break;
+            case 3:
+                {
+
+                }
+                break;
+            case 4:
+                {
+                    SetMush();
+                }
+                break;
+            case 5:
+                {
+                    SetMiniMush();
+                }
+                break;
+            case 6:
+                {
+                    SetStar();
+                }
+                break;
 
         }
+
+
     }
 
 

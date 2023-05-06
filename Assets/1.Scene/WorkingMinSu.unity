@@ -9477,6 +9477,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1656482840}
   - component: {fileID: 1656482839}
+  - component: {fileID: 1656482841}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -9515,6 +9516,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1656482841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656482838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e406e36cb48614aa64918d9f106fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!1 &1657874941
 GameObject:
   m_ObjectHideFlags: 0
@@ -12766,7 +12780,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!135 &543330549461270288
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -12794,7 +12808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 8f6915d6a1239be4c8fe5e506dfd35ea, type: 2}
   player: {fileID: 639732992}
-  playerRender: {fileID: 0}
+  playerRender: []
   mushRoomClip: {fileID: 8300000, guid: 753b59195569d3046b64625b27f67fd6, type: 3}
   coinClip: {fileID: 0}
   starClip: {fileID: 0}
@@ -12878,7 +12892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 8f6915d6a1239be4c8fe5e506dfd35ea, type: 2}
   player: {fileID: 639732992}
-  playerRender: {fileID: 0}
+  playerRender: []
   mushRoomClip: {fileID: 8300000, guid: 753b59195569d3046b64625b27f67fd6, type: 3}
   coinClip: {fileID: 0}
   starClip: {fileID: 8300000, guid: 9bfcd6857bb52cb4aa123da2a462358f, type: 3}
@@ -13034,7 +13048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   player: {fileID: 639732992}
-  playerRender: {fileID: 0}
+  playerRender: []
   mushRoomClip: {fileID: 0}
   coinClip: {fileID: 8300000, guid: a6056be3aa0869e46b46d76638222997, type: 3}
   starClip: {fileID: 0}
@@ -13172,7 +13186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &5546224093299325225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13187,7 +13201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 8f6915d6a1239be4c8fe5e506dfd35ea, type: 2}
   player: {fileID: 639732992}
-  playerRender: {fileID: 0}
+  playerRender: []
   mushRoomClip: {fileID: 0}
   coinClip: {fileID: 0}
   starClip: {fileID: 8300000, guid: 9bfcd6857bb52cb4aa123da2a462358f, type: 3}
