@@ -12766,7 +12766,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &543330549461270288
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -12800,7 +12800,7 @@ MonoBehaviour:
   starClip: {fileID: 0}
   desertClip: {fileID: 0}
   minimushClip: {fileID: 8300000, guid: 186bf20fb67b34443a81f3dc0e89a2c7, type: 3}
-  resetTransformClip: {fileID: 0}
+  resetTransformClip: {fileID: 8300000, guid: 4ba08d06fb15ac84a9773eac89e44810, type: 3}
   Audio: {fileID: 466262164}
   bgmAudio: {fileID: 0}
   OnItem:
@@ -12840,7 +12840,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 543330549461270287}
   m_LocalRotation: {x: -0.025813764, y: 0.70663553, z: 0.7066354, w: 0.025813764}
-  m_LocalPosition: {x: 3.68, y: 4.634, z: -0.21}
+  m_LocalPosition: {x: -0.09, y: 4.634, z: -0.49}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12884,7 +12884,7 @@ MonoBehaviour:
   starClip: {fileID: 8300000, guid: 9bfcd6857bb52cb4aa123da2a462358f, type: 3}
   desertClip: {fileID: 0}
   minimushClip: {fileID: 0}
-  resetTransformClip: {fileID: 0}
+  resetTransformClip: {fileID: 8300000, guid: 4ba08d06fb15ac84a9773eac89e44810, type: 3}
   Audio: {fileID: 466262164}
   bgmAudio: {fileID: 0}
   OnItem:
@@ -12952,7 +12952,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267514206836999031}
   m_LocalRotation: {x: 0, y: -0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 7.16, y: 5.12, z: 0}
+  m_LocalPosition: {x: 0.08, y: 5.12, z: 0}
   m_LocalScale: {x: 11, y: 11, z: 11}
   m_Children:
   - {fileID: 628258829045415224}
@@ -13172,7 +13172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &5546224093299325225
 MonoBehaviour:
   m_ObjectHideFlags: 0
