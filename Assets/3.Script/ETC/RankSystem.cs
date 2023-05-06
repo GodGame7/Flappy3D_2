@@ -30,13 +30,9 @@ public class RankSystem : MonoBehaviour
     [SerializeField] private InputField inputName_InputField;
     [SerializeField] private GameObject pleaseRetry_txt;
 
-
     [Header("Ranking_UI")]
     [SerializeField] private GameObject ranking_UI;
     [SerializeField] private Text ranking_text;
-
-    [Header("GameManager")]
-    [SerializeField] private GameManager gameManager;
 
     private int score;
     private string path;
@@ -51,7 +47,7 @@ public class RankSystem : MonoBehaviour
     // 죽었는지 확인
     private void Update()
     {
-        if(!gameManager.isGameOver)
+        if(!GameManager.Instance.isGameOver)
         {
             return;
         }
@@ -61,7 +57,7 @@ public class RankSystem : MonoBehaviour
     // 게임 종료 후 이름을 입력할 UI 활성화
     public void On_InputName()
     {
-        score = gameManager.SCORE;
+        score = GameManager.Instance.SCORE;
         inputName_UI.SetActive(true);
         pleaseRetry_txt.SetActive(false);
     }
