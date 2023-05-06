@@ -7,6 +7,7 @@ public class PlayerInput : MonoBehaviour
     public event Action OnClick;
     private PlayerMovement move;
     private GameManager gm;
+    
 
     private void Awake()
     {
@@ -66,7 +67,11 @@ public class PlayerInput : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Pipe"))
+        if (other.CompareTag("Pipe")&& GameManager.Instance.isBooster)
+        {
+            other.gameObject.SetActive(false);
+        }
+        else if (other.CompareTag("Pipe")&& !GameManager.Instance.isBooster)
         {
             gm.isStart = false;
             gm.isGameOver = true;

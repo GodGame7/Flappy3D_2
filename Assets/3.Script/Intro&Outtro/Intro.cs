@@ -44,6 +44,11 @@ public class Intro : MonoBehaviour
         StartCoroutine(Start_Game());
     }
 
+    public void End_Button()
+    {
+        Application.Quit();
+    }
+
     //게임 시작하는 코루틴
     IEnumerator Start_Game()
     {

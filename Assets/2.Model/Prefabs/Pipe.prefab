@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1089361204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1089361205}
+  - component: {fileID: 1089361206}
+  m_Layer: 0
+  m_Name: ItemSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1089361205
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089361204}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.33, z: 3.32}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 29127903212507194}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1089361206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089361204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f9eab9007fd46043b442b03cf90f782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coin: {fileID: 8398473500268344637, guid: 1a9f03312ae6cd14590e1ae40ee7ef1a, type: 3}
+  mushRoom: {fileID: 4898353684075520120, guid: 35e9c420f7c287e46958881827257555, type: 3}
+  miniMush: {fileID: 3137795813504356602, guid: e3148750e828f2347a9d9e79d67617fe, type: 3}
+  star: {fileID: 1630341598661355977, guid: 2eda904c26d67f1498c8967f32423318, type: 3}
 --- !u!1 &29127901472805755
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +271,7 @@ Transform:
   - {fileID: 1634853655423407547}
   - {fileID: 2051438630833933737}
   - {fileID: 8386300507983560300}
+  - {fileID: 1089361205}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -240,6 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  Direction: {x: 0, y: 0, z: -1}
 --- !u!114 &-677590138235007110
 MonoBehaviour:
   m_ObjectHideFlags: 0
