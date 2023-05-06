@@ -67,7 +67,7 @@ public class PlayerInput : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Piep")&& GameManager.Instance.isBooster)
+        if (other.CompareTag("Pipe")&& GameManager.Instance.isBooster)
         {
            
         }
