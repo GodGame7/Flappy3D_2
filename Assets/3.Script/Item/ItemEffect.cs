@@ -49,11 +49,16 @@ public class ItemEffect : MonoBehaviour
             OnItem?.Invoke();
         }
     }
+    private Coroutine starCoroutine;
     public void OnStar()
     {
         //스타를 먹었을 때만, 스크롤오브젝트를 찾도록
         Scroll = FindObjectsOfType<ScrollObject>();
-        StartCoroutine(Star_co());
+        if (starCoroutine != null)
+        {
+            StopCoroutine(starCoroutine);
+        }
+        starCoroutine = StartCoroutine(Star_co());
     }
 
     public void OnMushroom()
@@ -108,6 +113,18 @@ public class ItemEffect : MonoBehaviour
 
     private IEnumerator Star_co()
     {
+        if (GameManager.Instance.isBooster)
+        {
+            for (int i = 0; i < Scroll.Length; i++)
+            {
+                OnStarBooster.RemoveListener(Scroll[i].BoosterOn);
+            }
+            for (int i = 0; i < Scroll.Length; i++)
+            {
+                OnStarBooster.AddListener(Scroll[i].BoosterOff);
+            }
+            OnStarBooster?.Invoke(itemData.speed);
+        }
         //모든 스크롤 속도 올림
         for (int i = 0; i < Scroll.Length; i++)
         {
