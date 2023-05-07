@@ -22604,6 +22604,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a5dcaece97feb458f6b15a9cebc98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPipeOff:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   input: 0
 --- !u!54 &6753120616755045859
 Rigidbody:
@@ -26326,7 +26341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pipePrefab: {fileID: 29127903212507195, guid: de507e670cb5f834182a62863aebe129, type: 3}
   startTime: 1
-  cnt: 5
+  length: 0
 --- !u!135 &8398473499452012673
 SphereCollider:
   m_ObjectHideFlags: 0

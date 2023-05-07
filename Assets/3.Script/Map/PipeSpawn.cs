@@ -9,12 +9,10 @@ public class PipeSpawn : MonoBehaviour
     private GameObject pipePrefab;
     [SerializeField]
     private float startTime = 5f;
-    [SerializeField]
-    private int length;
+    private int length = 5;
 
     private void Awake()
     {
-        length = transform.childCount;
         GameObject pipesParent = GameObject.Find("Pipes");
         pipes = new GameObject[length];
         for (int i = 0; i < length; i++)
