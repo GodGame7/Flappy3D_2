@@ -21995,7 +21995,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6753120616755045856}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.47, z: 0}
+  m_LocalPosition: {x: 0, y: -0.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3048060180405596100}
@@ -26341,7 +26341,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pipePrefab: {fileID: 29127903212507195, guid: de507e670cb5f834182a62863aebe129, type: 3}
   startTime: 1
-  length: 0
 --- !u!135 &8398473499452012673
 SphereCollider:
   m_ObjectHideFlags: 0
