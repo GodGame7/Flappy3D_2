@@ -69,7 +69,11 @@ public class PlayerInput : MonoBehaviour
     {
         if (other.CompareTag("Pipe")&& GameManager.Instance.isBooster)
         {
-            other.gameObject.SetActive(false);
+            //제일 상위 부모 오브젝트 끔
+            //other.gameObject.transform.root.gameObject.SetActive(false);
+
+            //부모의 부모 오브젝트 끔
+            other.gameObject.transform.parent.parent.gameObject.SetActive(false);
         }
         else if (other.CompareTag("Pipe")&& !GameManager.Instance.isBooster)
         {
