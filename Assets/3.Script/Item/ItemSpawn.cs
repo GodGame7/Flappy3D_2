@@ -10,13 +10,36 @@ public class ItemSpawn : MonoBehaviour
     [SerializeField] private GameObject star;
     private float LastSpawnItem = 0f;
     private int ranNum;
+    GameObject[] CoinItem = new GameObject[3];
+    GameObject[] mushRoomItem = new GameObject[3];
+    GameObject[] miniMushItem = new GameObject[3];
+    GameObject[] starItem = new GameObject[3];
+    private int coinItemNum = 0;
+    private int mushRoomItemNum = 0;
+    private int miniMushItemNum = 0;
+    private int starItemNum = 0;
+    private Vector3 CreateItemPosition = new Vector3(999, 999, 999);
 
     private void Awake()
     {
+
         coin = GameObject.FindGameObjectWithTag("Coin");
         mushRoom = GameObject.FindGameObjectWithTag("Mush");
         miniMush = GameObject.FindGameObjectWithTag("MiniMush");
         star = GameObject.FindGameObjectWithTag("Star");
+
+
+        for (int i=0; i<3; i++)
+        {
+            CoinItem[i] = Instantiate(coin, CreateItemPosition, Quaternion.identity);
+            CoinItem[i].SetActive(false);
+            mushRoomItem[i] = Instantiate(mushRoom, CreateItemPosition, Quaternion.identity);
+            mushRoomItem[i].SetActive(false);
+            miniMushItem[i] = Instantiate(miniMush, CreateItemPosition, Quaternion.identity);
+            miniMushItem[i].SetActive(false);
+            starItem[i] = Instantiate(star, CreateItemPosition, Quaternion.identity);
+            starItem[i].SetActive(false);
+        }
         RandomSpawn();
     }
 
@@ -65,28 +88,53 @@ public class ItemSpawn : MonoBehaviour
 
     public void SetCoin()
     {
-        coin.SetActive(true);
+
+        coinItemNum++;
+        CoinItem[coinItemNum].SetActive(true);
         coin.transform.position = transform.position;
         LastSpawnItem = 0;
+        if (coinItemNum >= 3)
+        { 
+            coinItemNum = 0; 
+        }
+        Debug.Log("코인"+coinItemNum);
     }
 
     public void SetMush()
     {
-        mushRoom.SetActive(true);
+        mushRoomItemNum++;
+        mushRoomItem[mushRoomItemNum].SetActive(true);
         mushRoom.transform.position = transform.position;
         LastSpawnItem = 0;
+        if (mushRoomItemNum >= 3)
+        {
+            mushRoomItemNum = 0;
+        }
+        Debug.Log("버섯 아이템 "+mushRoomItemNum);
     }
     public void SetMiniMush()
     {
-        miniMush.SetActive(true);
+        miniMushItemNum++;
+        miniMushItem[miniMushItemNum].SetActive(true);
         miniMush.transform.position = transform.position;
         LastSpawnItem = 0;
+        if (miniMushItemNum >= 3)
+        {
+            miniMushItemNum = 0;
+        }
+        Debug.Log("작은버섯" +miniMushItemNum);
     }
 
     public void SetStar()
     {
-        star.SetActive(true);
+        starItemNum++;
+        starItem[starItemNum].SetActive(true);
         star.transform.position = transform.position;
         LastSpawnItem = 0;
+        if (starItemNum >= 3)
+        {
+            starItemNum = 0;
+        }
+        Debug.Log("별" +starItemNum);
     }
 }
