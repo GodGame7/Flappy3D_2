@@ -10,16 +10,18 @@ public class ItemSpawn : MonoBehaviour
     [SerializeField] private GameObject star;
     private float LastSpawnItem = 0f;
     private int ranNum;
+
     private void Awake()
     {
         coin = GameObject.FindGameObjectWithTag("Coin");
         mushRoom = GameObject.FindGameObjectWithTag("Mush");
         miniMush = GameObject.FindGameObjectWithTag("MiniMush");
         star = GameObject.FindGameObjectWithTag("Star");
+        RandomSpawn();
     }
-    private void OnEnable()
-    {
 
+    public void RandomSpawn()
+    {
         ranNum = Random.Range(0, 7);
         switch (ranNum)
         {
@@ -58,12 +60,8 @@ public class ItemSpawn : MonoBehaviour
                     SetStar();
                 }
                 break;
-
         }
-
-
     }
-
 
     public void SetCoin()
     {
