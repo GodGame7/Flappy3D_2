@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class ItemEffect : MonoBehaviour
 {
-
-
     [SerializeField] private ItemData itemData;
     [Header("플레이어")]
     [SerializeField] private GameObject player;
@@ -24,7 +22,6 @@ public class ItemEffect : MonoBehaviour
     [Header("이벤트")]
     public UnityEvent OnItem;
 
-    
     [System.Serializable]
     public class BoosterEvent : UnityEvent<float> { }
     BoosterEvent OnStarBooster;
@@ -57,7 +54,7 @@ public class ItemEffect : MonoBehaviour
         {
             StopCoroutine(starCoroutine);
         }
-        starCoroutine = StartCoroutine(Star_co());
+        starCoroutine = StartCoroutine(Star_co2());
     }
 
     public void OnMushroom()
@@ -106,6 +103,48 @@ public class ItemEffect : MonoBehaviour
         Audio.PlayOneShot(resetTransformClip);
         gameObject.SetActive(false);
 
+    }
+
+    private IEnumerator Star_co2()
+    {
+        if (GameManager.Instance.isBooster)
+        {
+           
+        }
+        //모든 스크롤 속도 올림
+        GameManager.Instance.speed = 15f;
+        //OnStarBooster.RemoveListener(Scroll.BoosterOff);
+        //OnStarBooster.AddListener(Scroll.BoosterOn);
+        // 부스터
+        bgmAudio.Stop();
+
+        //스타 오디오 실행
+        bgmAudio.PlayOneShot(starClip);
+        gameObject.transform.position = new Vector3(999, 999, 999);
+        GameManager.Instance.isBooster = true;
+
+        for (int i = 0; i < playerRender.Length; i++)
+        {
+            playerRender[i].material.color = Color.yellow;
+        }
+
+        yield return new WaitForSeconds(7f);
+        //다시 원색으로 복귀
+        for (int i = 0; i < playerRender.Length; i++)
+        {
+            playerRender[i].material.color = Color.white;
+        }
+
+
+        //여기서 속도 다시리셋
+        GameManager.Instance.speed = 10f;
+        bgmAudio.Stop();
+        GameManager.Instance.isBooster = false;
+        bgmAudio.clip = desertClip;
+        bgmAudio.Play();
+        endStarTime = 0;
+        gameObject.SetActive(false);
+        yield return null;
     }
     private IEnumerator Star_co()
     {
@@ -180,6 +219,5 @@ public class ItemEffect : MonoBehaviour
         endStarTime = 0;
         gameObject.SetActive(false);
         yield return null;
-
     }
 }

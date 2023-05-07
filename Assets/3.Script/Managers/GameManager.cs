@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     {
         Init();
     }
-
+    public float speed = 10f;
     public void Init()
     {
         isStart = false;

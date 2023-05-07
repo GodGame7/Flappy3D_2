@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class ItemSpawn : MonoBehaviour
 {
-    [SerializeField] private GameObject coin;
-    [SerializeField] private GameObject mushRoom;
-    [SerializeField] private GameObject miniMush;
-    [SerializeField] private GameObject star;
+    private GameObject coin;
+    private GameObject mushRoom;
+    private GameObject miniMush;
+    private GameObject star;
     private float LastSpawnItem = 0f;
     private int ranNum;
-    GameObject[] CoinItem = new GameObject[3];
-    GameObject[] mushRoomItem = new GameObject[3];
-    GameObject[] miniMushItem = new GameObject[3];
-    GameObject[] starItem = new GameObject[3];
+    [SerializeField] GameObject[] CoinItem = new GameObject[3];
+    [SerializeField] GameObject[] mushRoomItem = new GameObject[3];
+    [SerializeField] GameObject[] miniMushItem = new GameObject[3];
+    [SerializeField] GameObject[] starItem = new GameObject[3];
     private int coinItemNum = 0;
     private int mushRoomItemNum = 0;
     private int miniMushItemNum = 0;
@@ -22,22 +22,19 @@ public class ItemSpawn : MonoBehaviour
 
     private void Awake()
     {
-
         coin = GameObject.FindGameObjectWithTag("Coin");
         mushRoom = GameObject.FindGameObjectWithTag("Mush");
         miniMush = GameObject.FindGameObjectWithTag("MiniMush");
         star = GameObject.FindGameObjectWithTag("Star");
-
-
         for (int i=0; i<3; i++)
         {
-            CoinItem[i] = Instantiate(coin, CreateItemPosition, Quaternion.identity);
+            CoinItem[i] = Instantiate(coin, CreateItemPosition, Quaternion.Euler(-90,0,0));
             CoinItem[i].SetActive(false);
-            mushRoomItem[i] = Instantiate(mushRoom, CreateItemPosition, Quaternion.identity);
+            mushRoomItem[i] = Instantiate(mushRoom, CreateItemPosition, Quaternion.Euler(270, 180, 0));
             mushRoomItem[i].SetActive(false);
-            miniMushItem[i] = Instantiate(miniMush, CreateItemPosition, Quaternion.identity);
+            miniMushItem[i] = Instantiate(miniMush, CreateItemPosition, Quaternion.Euler(-90, 0, 180));
             miniMushItem[i].SetActive(false);
-            starItem[i] = Instantiate(star, CreateItemPosition, Quaternion.identity);
+            starItem[i] = Instantiate(star, CreateItemPosition, Quaternion.Euler(0, 180, 0));
             starItem[i].SetActive(false);
         }
         RandomSpawn();
@@ -88,53 +85,36 @@ public class ItemSpawn : MonoBehaviour
 
     public void SetCoin()
     {
-
         coinItemNum++;
-        CoinItem[coinItemNum].SetActive(true);
-        coin.transform.position = transform.position;
+        int index = coinItemNum % 3;
+        CoinItem[index].SetActive(true);
+        CoinItem[index].transform.position = transform.position;
         LastSpawnItem = 0;
-        if (coinItemNum >= 3)
-        { 
-            coinItemNum = 0; 
-        }
-        Debug.Log("코인"+coinItemNum);
     }
 
     public void SetMush()
     {
         mushRoomItemNum++;
-        mushRoomItem[mushRoomItemNum].SetActive(true);
-        mushRoom.transform.position = transform.position;
+        int index = mushRoomItemNum % 3;
+        mushRoomItem[index].SetActive(true);
+        mushRoomItem[index].transform.position = transform.position;
         LastSpawnItem = 0;
-        if (mushRoomItemNum >= 3)
-        {
-            mushRoomItemNum = 0;
-        }
-        Debug.Log("버섯 아이템 "+mushRoomItemNum);
     }
     public void SetMiniMush()
     {
         miniMushItemNum++;
-        miniMushItem[miniMushItemNum].SetActive(true);
-        miniMush.transform.position = transform.position;
+        int index = miniMushItemNum % 3;
+        miniMushItem[index].SetActive(true);
+        miniMushItem[index].transform.position = transform.position;
         LastSpawnItem = 0;
-        if (miniMushItemNum >= 3)
-        {
-            miniMushItemNum = 0;
-        }
-        Debug.Log("작은버섯" +miniMushItemNum);
     }
 
     public void SetStar()
     {
         starItemNum++;
-        starItem[starItemNum].SetActive(true);
-        star.transform.position = transform.position;
+        int index = starItemNum % 3;
+        starItem[index].SetActive(true);
+        starItem[index].transform.position = transform.position;
         LastSpawnItem = 0;
-        if (starItemNum >= 3)
-        {
-            starItemNum = 0;
-        }
-        Debug.Log("별" +starItemNum);
     }
 }
