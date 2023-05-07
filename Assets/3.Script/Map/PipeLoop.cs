@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PipeLoop : MonoBehaviour
 {
+    public UnityEvent OnPipeReset;
+
     private const float minPipeHeight = 0f;
     private const float maxPipeHeight = 9f;
 
@@ -31,6 +34,7 @@ public class PipeLoop : MonoBehaviour
 
     private void Reposition(float length)
     {
+        OnPipeReset?.Invoke();
         gameObject.SetActive(false);
         gameObject.SetActive(true);
         Vector3 position = length * cnt * Vector3.forward;
