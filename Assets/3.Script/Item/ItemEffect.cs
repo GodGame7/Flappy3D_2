@@ -10,7 +10,7 @@ public class ItemEffect : MonoBehaviour
     [SerializeField] private ItemData itemData;
     [Header("플레이어")]
     [SerializeField] private GameObject player;
-    [SerializeField] private Renderer playerRender;
+    [SerializeField] private Renderer[] playerRender;
 
     [Header("오디오")]
     [SerializeField] private AudioClip mushRoomClip;
@@ -22,18 +22,24 @@ public class ItemEffect : MonoBehaviour
     [SerializeField] private AudioSource Audio;
     [SerializeField] private AudioSource bgmAudio;
     [Header("이벤트")]
-
     public UnityEvent OnItem;
-    public UnityEvent<float> OnBooster;
+
+    
+    [System.Serializable]
+    public class BoosterEvent : UnityEvent<float> { }
+    BoosterEvent OnStarBooster;
     private ScrollObject Scroll;
     WaitForSeconds colorTime = new WaitForSeconds(0.01f);
     private float endStarTime = 0f;
-    private void Awake()
+    private void OnEnable()
     {
-        //gameObject.SetActive(true) ;
         Scroll = FindObjectOfType<ScrollObject>();
-
+        playerRender = player.GetComponentsInChildren<Renderer>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        OnStarBooster = new BoosterEvent();
     }
+
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -101,31 +107,40 @@ public class ItemEffect : MonoBehaviour
 
     private IEnumerator Star_co()
     {
-        //여기서 속도올려주고
-        GameManager.Instance.isBooster = true;
-        OnItem.Invoke();
+        //여기가 안됨 (부스터시작)
+        Debug.Log(OnStarBooster);
+        OnStarBooster.RemoveListener(Scroll.BoosterOff);
+        OnStarBooster.AddListener(Scroll.BoosterOn);
+        OnStarBooster?.Invoke(itemData.speed);
+        // 부스터
+        bgmAudio.Stop();
+        
         //스타 오디오 실행
         bgmAudio.PlayOneShot(starClip);
         gameObject.transform.position = new Vector3(999, 999, 999);
         GameManager.Instance.isBooster = true;
 
-        //콜라이더 제거
-
-        // 5초간 랜덤색으로 깜빡임
-        while (endStarTime <= 5f)
+        for (int i =0; i<playerRender.Length; i++)
         {
-
-            endStarTime += Time.deltaTime;
-            //playerRender.material.color = new Color(Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f);
-            yield return colorTime;
+            playerRender[i].material.color = Color.yellow;
         }
+        
+        yield return new WaitForSeconds(7f);
         //다시 원색으로 복귀
-        //playerRender.material.color = Color.white;
+        for (int i = 0; i < playerRender.Length; i++)
+        {
+            playerRender[i].material.color = Color.white;
+        }
 
-        //콜라이더 복귀
-        
-        
+
         //여기서 속도 다시리셋
+        //여기가 안됨 (부스터 스탑)
+        OnStarBooster.RemoveListener(Scroll.BoosterOn);
+        OnStarBooster.AddListener(Scroll.BoosterOff);
+        OnStarBooster?.Invoke(itemData.speed);
+        //부스터
+
+        bgmAudio.Stop();
         GameManager.Instance.isBooster = false;
         bgmAudio.clip = desertClip;
         bgmAudio.Play();
