@@ -26,6 +26,7 @@ public class PipeSpawn : MonoBehaviour
         StartCoroutine(nameof(PipeLoop_co));
     }
 
+
     private IEnumerator PipeLoop_co()
     {
         yield return new WaitForSeconds(startTime);
