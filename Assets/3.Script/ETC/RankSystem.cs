@@ -40,12 +40,11 @@ public class RankSystem : MonoBehaviour
     // 패스 초기화
     private void Awake()
     {
-        string folderPath = Path.Combine(Application.persistentDataPath, "Plugins");
-        if (!Directory.Exists(folderPath))
-        {
-            Directory.CreateDirectory(folderPath);
-        }
-        path = Path.Combine(folderPath, fileName);
+        //if (!Directory.Exists(Application.persistentDataPath))
+        //{
+        //    Directory.CreateDirectory(Application.persistentDataPath);
+        //}
+        path = Path.Combine(Application.persistentDataPath, fileName);
     }
 
     // 죽었는지 확인
