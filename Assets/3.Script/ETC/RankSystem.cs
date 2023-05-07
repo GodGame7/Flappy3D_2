@@ -40,12 +40,11 @@ public class RankSystem : MonoBehaviour
     // 패스 초기화
     private void Awake()
     {
-        string folderPath = Path.Combine(Application.persistentDataPath, "Plugins");
-        if (!Directory.Exists(folderPath))
-        {
-            Directory.CreateDirectory(folderPath);
-        }
-        path = Path.Combine(folderPath, fileName);
+        //if (!Directory.Exists(Application.persistentDataPath))
+        //{
+        //    Directory.CreateDirectory(Application.persistentDataPath);
+        //}
+        path = Path.Combine(Application.persistentDataPath, fileName);
     }
 
     // 죽었는지 확인
@@ -73,13 +72,13 @@ public class RankSystem : MonoBehaviour
         string name = inputName_InputField.text;
         string new_score = score.ToString();
 
-        // 3글자 이상 인지 확인
-        //if (name.Length != 3)
-        //{
-        //    StopCoroutine(OnErrorMessage());
-        //    StartCoroutine(OnErrorMessage());
-        //    return;
-        //}
+        // 3글자인지 확인
+        if ( 1 > name.Length || name.Length > 3)
+        {
+            StopCoroutine(OnErrorMessage());
+            StartCoroutine(OnErrorMessage());
+            return;
+        }
 
         // UI 변경
         inputName_UI.SetActive(false);

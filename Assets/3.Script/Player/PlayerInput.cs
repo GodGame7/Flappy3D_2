@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 
 public class PlayerInput : MonoBehaviour
 {
+    public UnityEvent OnPipeOff;
+
     public bool input = false;
     public event Action OnClick;
     private PlayerMovement move;
@@ -11,6 +14,8 @@ public class PlayerInput : MonoBehaviour
 
     private void Awake()
     {
+        OnPipeOff = new UnityEvent();
+
         gm = GameManager.Instance;
         move = GetComponent<PlayerMovement>();
     }
@@ -69,11 +74,12 @@ public class PlayerInput : MonoBehaviour
     {
         if (other.CompareTag("Pipe")&& GameManager.Instance.isBooster)
         {
-            //제일 상위 부모 오브젝트 끔
-            //other.gameObject.transform.root.gameObject.SetActive(false);
+            PipeOnOff pipeOnOff = other.GetComponentInParent<PipeOnOff>();
 
-            //부모의 부모 오브젝트 끔
-            other.gameObject.transform.parent.parent.gameObject.SetActive(false);
+            if (pipeOnOff != null)
+            {
+                pipeOnOff.PipeOff();
+            }
         }
         else if (other.CompareTag("Pipe")&& !GameManager.Instance.isBooster)
         {

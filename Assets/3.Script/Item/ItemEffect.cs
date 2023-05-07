@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class ItemEffect : MonoBehaviour
 {
-
-
     [SerializeField] private ItemData itemData;
     [Header("플레이어")]
     [SerializeField] private GameObject player;
@@ -24,22 +22,20 @@ public class ItemEffect : MonoBehaviour
     [Header("이벤트")]
     public UnityEvent OnItem;
 
-    
     [System.Serializable]
     public class BoosterEvent : UnityEvent<float> { }
     BoosterEvent OnStarBooster;
     private ScrollObject[] Scroll;
     //WaitForSeconds colorTime = new WaitForSeconds(0.01f);
     private float endStarTime = 0f;
+
     private void OnEnable()
     {
-        //Scroll = FindObjectsOfType<ScrollObject>();
+        Scroll = FindObjectsOfType<ScrollObject>();
         playerRender = player.GetComponentsInChildren<Renderer>();
         player = GameObject.FindGameObjectWithTag("Player");
         OnStarBooster = new BoosterEvent();
-    }
-
-    
+    }    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -49,18 +45,22 @@ public class ItemEffect : MonoBehaviour
             OnItem?.Invoke();
         }
     }
+
+    private Coroutine starCoroutine;
     public void OnStar()
     {
         //스타를 먹었을 때만, 스크롤오브젝트를 찾도록
-        Scroll = FindObjectsOfType<ScrollObject>();
-        StartCoroutine(Star_co());
+        if (starCoroutine != null)
+        {
+            StopCoroutine(starCoroutine);
+        }
+        starCoroutine = StartCoroutine(Star_co2());
     }
 
     public void OnMushroom()
     {
         StartCoroutine(Mushroom_co());
     }
-
     public void OnCoin()
     {
         //스코어 +1 
@@ -89,7 +89,6 @@ public class ItemEffect : MonoBehaviour
         gameObject.SetActive(false);
 
     }
-
     private IEnumerator MiniMushroom_co()
     {
         gameObject.transform.position = new Vector3(999, 999, 999);
@@ -106,8 +105,61 @@ public class ItemEffect : MonoBehaviour
 
     }
 
+    private IEnumerator Star_co2()
+    {
+        if (GameManager.Instance.isBooster)
+        {
+           
+        }
+        //모든 스크롤 속도 올림
+        GameManager.Instance.speed = 15f;
+        //OnStarBooster.RemoveListener(Scroll.BoosterOff);
+        //OnStarBooster.AddListener(Scroll.BoosterOn);
+        // 부스터
+        bgmAudio.Stop();
+
+        //스타 오디오 실행
+        bgmAudio.PlayOneShot(starClip);
+        gameObject.transform.position = new Vector3(999, 999, 999);
+        GameManager.Instance.isBooster = true;
+
+        for (int i = 0; i < playerRender.Length; i++)
+        {
+            playerRender[i].material.color = Color.yellow;
+        }
+
+        yield return new WaitForSeconds(7f);
+        //다시 원색으로 복귀
+        for (int i = 0; i < playerRender.Length; i++)
+        {
+            playerRender[i].material.color = Color.white;
+        }
+
+
+        //여기서 속도 다시리셋
+        GameManager.Instance.speed = 10f;
+        bgmAudio.Stop();
+        GameManager.Instance.isBooster = false;
+        bgmAudio.clip = desertClip;
+        bgmAudio.Play();
+        endStarTime = 0;
+        gameObject.SetActive(false);
+        yield return null;
+    }
     private IEnumerator Star_co()
     {
+        if (GameManager.Instance.isBooster)
+        {
+            for (int i = 0; i < Scroll.Length; i++)
+            {
+                OnStarBooster.RemoveListener(Scroll[i].BoosterOn);
+            }
+            for (int i = 0; i < Scroll.Length; i++)
+            {
+                OnStarBooster.AddListener(Scroll[i].BoosterOff);
+            }
+        OnStarBooster?.Invoke(itemData.speed);
+        }
         //모든 스크롤 속도 올림
         for (int i = 0; i < Scroll.Length; i++)
         {
@@ -167,6 +219,5 @@ public class ItemEffect : MonoBehaviour
         endStarTime = 0;
         gameObject.SetActive(false);
         yield return null;
-
     }
 }

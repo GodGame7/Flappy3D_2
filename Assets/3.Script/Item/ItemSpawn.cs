@@ -4,22 +4,44 @@ using UnityEngine;
 
 public class ItemSpawn : MonoBehaviour
 {
-    [SerializeField] private GameObject coin;
-    [SerializeField] private GameObject mushRoom;
-    [SerializeField] private GameObject miniMush;
-    [SerializeField] private GameObject star;
+    private GameObject coin;
+    private GameObject mushRoom;
+    private GameObject miniMush;
+    private GameObject star;
     private float LastSpawnItem = 0f;
     private int ranNum;
+    [SerializeField] GameObject[] CoinItem = new GameObject[3];
+    [SerializeField] GameObject[] mushRoomItem = new GameObject[3];
+    [SerializeField] GameObject[] miniMushItem = new GameObject[3];
+    [SerializeField] GameObject[] starItem = new GameObject[3];
+    private int coinItemNum = 0;
+    private int mushRoomItemNum = 0;
+    private int miniMushItemNum = 0;
+    private int starItemNum = 0;
+    private Vector3 CreateItemPosition = new Vector3(999, 999, 999);
+
     private void Awake()
     {
         coin = GameObject.FindGameObjectWithTag("Coin");
         mushRoom = GameObject.FindGameObjectWithTag("Mush");
         miniMush = GameObject.FindGameObjectWithTag("MiniMush");
         star = GameObject.FindGameObjectWithTag("Star");
+        for (int i=0; i<3; i++)
+        {
+            CoinItem[i] = Instantiate(coin, CreateItemPosition, Quaternion.Euler(-90,0,0));
+            CoinItem[i].SetActive(false);
+            mushRoomItem[i] = Instantiate(mushRoom, CreateItemPosition, Quaternion.Euler(270, 180, 0));
+            mushRoomItem[i].SetActive(false);
+            miniMushItem[i] = Instantiate(miniMush, CreateItemPosition, Quaternion.Euler(-90, 0, 180));
+            miniMushItem[i].SetActive(false);
+            starItem[i] = Instantiate(star, CreateItemPosition, Quaternion.Euler(0, 180, 0));
+            starItem[i].SetActive(false);
+        }
+        RandomSpawn();
     }
-    private void OnEnable()
-    {
 
+    public void RandomSpawn()
+    {
         ranNum = Random.Range(0, 7);
         switch (ranNum)
         {
@@ -58,37 +80,41 @@ public class ItemSpawn : MonoBehaviour
                     SetStar();
                 }
                 break;
-
         }
-
-
     }
-
 
     public void SetCoin()
     {
-        coin.SetActive(true);
-        coin.transform.position = transform.position;
+        coinItemNum++;
+        int index = coinItemNum % 3;
+        CoinItem[index].SetActive(true);
+        CoinItem[index].transform.position = transform.position;
         LastSpawnItem = 0;
     }
 
     public void SetMush()
     {
-        mushRoom.SetActive(true);
-        mushRoom.transform.position = transform.position;
+        mushRoomItemNum++;
+        int index = mushRoomItemNum % 3;
+        mushRoomItem[index].SetActive(true);
+        mushRoomItem[index].transform.position = transform.position;
         LastSpawnItem = 0;
     }
     public void SetMiniMush()
     {
-        miniMush.SetActive(true);
-        miniMush.transform.position = transform.position;
+        miniMushItemNum++;
+        int index = miniMushItemNum % 3;
+        miniMushItem[index].SetActive(true);
+        miniMushItem[index].transform.position = transform.position;
         LastSpawnItem = 0;
     }
 
     public void SetStar()
     {
-        star.SetActive(true);
-        star.transform.position = transform.position;
+        starItemNum++;
+        int index = starItemNum % 3;
+        starItem[index].SetActive(true);
+        starItem[index].transform.position = transform.position;
         LastSpawnItem = 0;
     }
 }
