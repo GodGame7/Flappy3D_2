@@ -73,13 +73,17 @@ public class RankSystem : MonoBehaviour
         string name = inputName_InputField.text;
         string new_score = score.ToString();
 
-        // 3글자 이상 인지 확인
-        //if (name.Length != 3)
-        //{
-        //    StopCoroutine(OnErrorMessage());
-        //    StartCoroutine(OnErrorMessage());
-        //    return;
-        //}
+        UnityEngine.Debug.Log(name);
+        UnityEngine.Debug.Log(name.Length);
+        UnityEngine.Debug.Log(1 > name.Length || name.Length > 3);
+
+        // 3글자인지 확인
+        if ( 1 > name.Length || name.Length > 3)
+        {
+            StopCoroutine(OnErrorMessage());
+            StartCoroutine(OnErrorMessage());
+            return;
+        }
 
         // UI 변경
         inputName_UI.SetActive(false);
