@@ -29,15 +29,15 @@ public class PipeLoop : MonoBehaviour
         if (transform.position.z <= -returnPosition)
         {
             Reposition(setPosition);
+            OnPipeReset?.Invoke();
         }
     }
 
     private void Reposition(float length)
     {
-        OnPipeReset?.Invoke();
-        gameObject.SetActive(false);
-        gameObject.SetActive(true);
         Vector3 position = length * cnt * Vector3.forward;
         transform.position += position;
+        gameObject.SetActive(false);
+        gameObject.SetActive(true);
     }
 }
