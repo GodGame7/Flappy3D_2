@@ -28,12 +28,12 @@ public class ItemEffect : MonoBehaviour
     [System.Serializable]
     public class BoosterEvent : UnityEvent<float> { }
     BoosterEvent OnStarBooster;
-    private ScrollObject Scroll;
-    WaitForSeconds colorTime = new WaitForSeconds(0.01f);
+    private ScrollObject[] Scroll;
+    //WaitForSeconds colorTime = new WaitForSeconds(0.01f);
     private float endStarTime = 0f;
     private void OnEnable()
     {
-        Scroll = FindObjectOfType<ScrollObject>();
+        //Scroll = FindObjectsOfType<ScrollObject>();
         playerRender = player.GetComponentsInChildren<Renderer>();
         player = GameObject.FindGameObjectWithTag("Player");
         OnStarBooster = new BoosterEvent();
@@ -46,12 +46,13 @@ public class ItemEffect : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             //이벤트발생
-
             OnItem?.Invoke();
         }
     }
     public void OnStar()
     {
+        //스타를 먹었을 때만, 스크롤오브젝트를 찾도록
+        Scroll = FindObjectsOfType<ScrollObject>();
         StartCoroutine(Star_co());
     }
 
@@ -107,10 +108,18 @@ public class ItemEffect : MonoBehaviour
 
     private IEnumerator Star_co()
     {
-        //여기가 안됨 (부스터시작)
-        Debug.Log(OnStarBooster);
-        OnStarBooster.RemoveListener(Scroll.BoosterOff);
-        OnStarBooster.AddListener(Scroll.BoosterOn);
+        //모든 스크롤 속도 올림
+        for (int i = 0; i < Scroll.Length; i++)
+        {
+            OnStarBooster.RemoveListener(Scroll[i].BoosterOff);
+        }
+        for (int i = 0; i < Scroll.Length; i++)
+        {
+            OnStarBooster.AddListener(Scroll[i].BoosterOn);
+        }
+
+        //OnStarBooster.RemoveListener(Scroll.BoosterOff);
+        //OnStarBooster.AddListener(Scroll.BoosterOn);
         OnStarBooster?.Invoke(itemData.speed);
         // 부스터
         bgmAudio.Stop();
@@ -135,8 +144,19 @@ public class ItemEffect : MonoBehaviour
 
         //여기서 속도 다시리셋
         //여기가 안됨 (부스터 스탑)
-        OnStarBooster.RemoveListener(Scroll.BoosterOn);
-        OnStarBooster.AddListener(Scroll.BoosterOff);
+
+        //모든 스크롤 속도 내림
+        for (int i = 0; i < Scroll.Length; i++)
+        {
+            OnStarBooster.RemoveListener(Scroll[i].BoosterOn);
+        }
+        for (int i = 0; i < Scroll.Length; i++)
+        {
+            OnStarBooster.AddListener(Scroll[i].BoosterOff);
+        }
+        //OnStarBooster.RemoveListener(Scroll.BoosterOn);
+        //OnStarBooster.AddListener(Scroll.BoosterOff);
+
         OnStarBooster?.Invoke(itemData.speed);
         //부스터
 
