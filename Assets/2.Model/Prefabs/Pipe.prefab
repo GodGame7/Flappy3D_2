@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1089361204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.33, z: 3.32}
+  m_LocalPosition: {x: 0, y: 0.33, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 29127903212507194}
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: -677590138235007110}
   m_Layer: 7
   m_Name: Pipe
-  m_TagString: Pipe
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -301,6 +301,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47f2e7c971db80c42b2fa80d21e96647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPipeReset:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8927421028818156400}
+        m_TargetAssemblyTypeName: PipeOnOff, Assembly-CSharp
+        m_MethodName: PipeOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3000929224651100150}
+        m_TargetAssemblyTypeName: PipeOnOff, Assembly-CSharp
+        m_MethodName: PipeOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1089361206}
+        m_TargetAssemblyTypeName: ItemSpawn, Assembly-CSharp
+        m_MethodName: RandomSpawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   setPosition: 20
   returnPosition: 10
   cnt: 5
@@ -313,9 +352,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1634853655423407547}
+  - component: {fileID: 8927421028818156400}
   m_Layer: 0
   m_Name: Top Pipe
-  m_TagString: Untagged
+  m_TagString: Pipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -336,6 +376,19 @@ Transform:
   m_Father: {fileID: 29127903212507194}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8927421028818156400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617783112420548172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7645f526143c57d479ff397258cb9832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderers: []
 --- !u!1 &4209281699305841317
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,9 +590,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2051438630833933737}
+  - component: {fileID: 3000929224651100150}
   m_Layer: 0
   m_Name: Bottom Pipe
-  m_TagString: Untagged
+  m_TagString: Pipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -560,6 +614,19 @@ Transform:
   m_Father: {fileID: 29127903212507194}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3000929224651100150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4737040591979414167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7645f526143c57d479ff397258cb9832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderers: []
 --- !u!1 &7788845723531765559
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,6 +669,6 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 5
+  m_Height: 29
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
