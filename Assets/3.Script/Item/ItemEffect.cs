@@ -87,7 +87,6 @@ public class ItemEffect : MonoBehaviour
         player.transform.localScale = new Vector3(1, 1, 1);
         Audio.PlayOneShot(resetTransformClip);
         gameObject.SetActive(false);
-
     }
     private IEnumerator MiniMushroom_co()
     {
@@ -128,7 +127,7 @@ public class ItemEffect : MonoBehaviour
             playerRender[i].material.color = Color.yellow;
         }
 
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(6f);
         //다시 원색으로 복귀
         for (int i = 0; i < playerRender.Length; i++)
         {
