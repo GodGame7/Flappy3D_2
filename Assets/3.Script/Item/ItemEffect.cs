@@ -106,36 +106,20 @@ public class ItemEffect : MonoBehaviour
 
     private IEnumerator Star_co2()
     {
-        if (GameManager.Instance.isBooster)
-        {
-           
-        }
-        //모든 스크롤 속도 올림
         GameManager.Instance.speed = 15f;
-        //OnStarBooster.RemoveListener(Scroll.BoosterOff);
-        //OnStarBooster.AddListener(Scroll.BoosterOn);
-        // 부스터
         bgmAudio.Stop();
-
-        //스타 오디오 실행
         bgmAudio.PlayOneShot(starClip);
         gameObject.transform.position = new Vector3(999, 999, 999);
         GameManager.Instance.isBooster = true;
-
         for (int i = 0; i < playerRender.Length; i++)
         {
             playerRender[i].material.color = Color.yellow;
         }
-
-        yield return new WaitForSeconds(6f);
-        //다시 원색으로 복귀
+        yield return new WaitForSeconds(7.6f);
         for (int i = 0; i < playerRender.Length; i++)
         {
             playerRender[i].material.color = Color.white;
         }
-
-
-        //여기서 속도 다시리셋
         GameManager.Instance.speed = 10f;
         bgmAudio.Stop();
         GameManager.Instance.isBooster = false;
