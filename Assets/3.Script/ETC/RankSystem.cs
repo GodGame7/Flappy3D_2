@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class RankSystem : MonoBehaviour
 {
-
     public static RankSystem instance = null;
 
     // 랭킹을 저장할 자료구조
@@ -41,7 +40,11 @@ public class RankSystem : MonoBehaviour
     // 패스 초기화
     private void Awake()
     {
-        path = Path.Combine(Application.dataPath, "Plugins/", fileName);
+        //if (!Directory.Exists(Application.persistentDataPath))
+        //{
+        //    Directory.CreateDirectory(Application.persistentDataPath);
+        //}
+        path = Path.Combine(Application.persistentDataPath, fileName);
     }
 
     // 죽었는지 확인
@@ -69,8 +72,8 @@ public class RankSystem : MonoBehaviour
         string name = inputName_InputField.text;
         string new_score = score.ToString();
 
-        // 3글자 이상 인지 확인
-        if (name.Length != 3)
+        // 3글자인지 확인
+        if ( 1 > name.Length || name.Length > 3)
         {
             StopCoroutine(OnErrorMessage());
             StartCoroutine(OnErrorMessage());
@@ -107,9 +110,12 @@ public class RankSystem : MonoBehaviour
     // 랭킹 저장
     public void M_input_ranking_jaon(Ranking ranking)
     {
-
         // Json에 new 기록 정렬 및 저장
         string json = JsonConvert.SerializeObject(ranking);
+        if (!File.Exists(path))
+        {
+            File.WriteAllText(path, "[]");
+        }
         string exist_json = File.ReadAllText(path);
         List<Ranking> exist_ranking = JsonConvert.DeserializeObject<List<Ranking>>(exist_json);                     // 정보를 Json 객체로 변환
         IEnumerable<Ranking> combine_ranking = exist_ranking.Concat(new[] { ranking });                             // 두 Json 객체를 합침.

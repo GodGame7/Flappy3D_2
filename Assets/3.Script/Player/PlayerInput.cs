@@ -1,15 +1,21 @@
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 
 public class PlayerInput : MonoBehaviour
 {
+    public UnityEvent OnPipeOff;
+
     public bool input = false;
     public event Action OnClick;
     private PlayerMovement move;
     private GameManager gm;
+    
 
     private void Awake()
     {
+        OnPipeOff = new UnityEvent();
+
         gm = GameManager.Instance;
         move = GetComponent<PlayerMovement>();
     }
@@ -66,7 +72,16 @@ public class PlayerInput : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Pipe"))
+        if (other.CompareTag("Pipe")&& GameManager.Instance.isBooster)
+        {
+            PipeOnOff pipeOnOff = other.GetComponentInParent<PipeOnOff>();
+
+            if (pipeOnOff != null)
+            {
+                pipeOnOff.PipeOff();
+            }
+        }
+        else if (other.CompareTag("Pipe")&& !GameManager.Instance.isBooster)
         {
             gm.isStart = false;
             gm.isGameOver = true;
